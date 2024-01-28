@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validación documento de identidad</title>
+</head>
+<body>
+    <h1>Validación de documento</h1>
+
+    <input type="file" id="frontImage" accept="image/*"/>
+    <input type="file" id="reverseImage" accept="image/*"/>
+
+    <button type="button" onclick="main()">Cargar imagenes</button>
+
+    <button id="validateButton" onclick="validateDocument()" disabled>Validar documento</button>
+
+    <script src="main.js"></script>
+
+</body>
+</html>
