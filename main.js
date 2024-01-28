@@ -28,7 +28,7 @@ async function main() {
     // Verificamos que se hayan cargado ambas imagenes
     if (!frontImageInput.files[0] || !backImageInput.files[0]) {
         alert('Por favor, carga ambas imágenes del documento.');
-        return null; // Devolver null o manejar el caso de error de alguna manera
+        return null;
     } else {
         const images = new FormData();
         // Agregamos las imágenes al objeto FormData
@@ -47,7 +47,7 @@ async function main() {
         validation_id = dataValidation.validation_id;
     
 
-        //Realizamos petición 'PUT' 
+        //Subimos cada una de las imagenes del documento 
         uploadFrontImage(urlFront, frontImage);
         uploadReverseImage(urlReverse, reverseImage);
 
@@ -59,6 +59,7 @@ async function main() {
 
 }
 
+//Creamos una nueva validación del documento
 async function createValidation() {
     try {  
         const formData = new URLSearchParams();
@@ -85,6 +86,7 @@ async function createValidation() {
 }
 }
 
+//Cargamos la imagen frontal del documento 
 async function uploadFrontImage(urlFront, frontImage) {
     const authorizationHeader = `Bearer ${API_KEY}`;
     try {
@@ -109,6 +111,7 @@ async function uploadFrontImage(urlFront, frontImage) {
     }
 }
 
+//Cargamos la imagen reversa del documento
 async function uploadReverseImage(urlReverse, reverseImage) {
     try {
         const response = await fetch(corsAnywhereUrl + urlReverse, {
@@ -130,6 +133,7 @@ async function uploadReverseImage(urlReverse, reverseImage) {
     }
 }
 
+//Procedemos a realizar la validación del documento 
 async function validateDocument() {
     try {
         const response = await fetch(URL+validation_id, {
@@ -146,8 +150,7 @@ async function validateDocument() {
 
         const data = await response.json();
         document.getElementById('resultado').value = JSON.stringify(data, null, 2);
-        //alert('Validación exitosa:', response);
-        console.log('*****', data);
+
     } catch (error) {
         console.error('Error durante la validación:', error);
         }
