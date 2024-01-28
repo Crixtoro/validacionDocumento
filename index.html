@@ -4,18 +4,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Validación documento de identidad</title>
+
+    <style>
+        section {
+            margin-bottom: 20px;
+        }
+
+        button {
+            display: block;
+            margin-top: 10px;
+        }
+    </style>
+    
 </head>
 <body>
-    <h1>Validación de documento</h1>
 
-    <input type="file" id="frontImage" accept="image/*"/>
-    <input type="file" id="reverseImage" accept="image/*"/>
+    <header>
+        <h1>Validación de documento</h1>
+    </header>
 
-    <button type="button" onclick="main()">Cargar imagenes</button>
+    <section id="apiSection">
+        <label for="input">Ingrese API KEY:</label>
+        <input type="text" id="input">
+        <button onclick="readKey()">Ingresar clave</button>
+    </section>
 
-    <button id="validateButton" onclick="validateDocument()" disabled>Validar documento</button>
+    <section id="imageSection">
+        <input type="file" id="frontImage" accept="image/*"/>
+        <input type="file" id="reverseImage" accept="image/*"/>
+        <button id="saveImages" onclick="main()" disabled>Cargar imagenes</button>
+    </section>
 
-    <script src="main.js"></script>
+    <section id="validationSection">
+        <button id="validateButton" onclick="validateDocument()" disabled>Validar documento</button>
+        <h2>Resultado validación:</h2>
+        <textarea id="resultado" rows="10" cols="50" readonly></textarea>
+    </section>
+
+    <footer>
+        <script src="main.js"></script>
+    </footer>
 
 </body>
 </html>

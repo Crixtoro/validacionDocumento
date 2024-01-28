@@ -1,13 +1,26 @@
 //url API
 const URL = 'https://api.validations.truora.com/v1/validations/';
-//Authorization header 
-const API_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50X2lkIjoiIiwiYWRkaXRpb25hbF9kYXRhIjoie30iLCJjbGllbnRfaWQiOiJUQ0kzY2EzNDFjNGQ5Njc2MDQ2ZjI2ZDFmOGJkMDQyMDBjNyIsImV4cCI6MzI3MzU4ODMwNCwiZ3JhbnQiOiIiLCJpYXQiOjE2OTY3ODgzMDQsImlzcyI6Imh0dHBzOi8vY29nbml0by1pZHAudXMtZWFzdC0xLmFtYXpvbmF3cy5jb20vdXMtZWFzdC0xXzZRcXBPblF2NyIsImp0aSI6IjM0ZTRhYjc3LTQxYjMtNDIxMy04N2Q4LWZhMDI5M2FmOGQyYSIsImtleV9uYW1lIjoicHJ1ZWJhX3RlY25pY2FfaGFtYWwiLCJrZXlfdHlwZSI6ImJhY2tlbmQiLCJ1c2VybmFtZSI6InRydW9yYW5hb3MtcHJ1ZWJhX3RlY25pY2FfaGFtYWwifQ.gpyfPT-DprI3s3Fah7--46sr-ZkGWduJx3L_b9zmWA4';
 const corsAnywhereUrl = 'https://cors-anywhere.herokuapp.com/';
 
+var API_KEY = "";
 var validation_id;
 
-async function main() {
+async function readKey(){
+    //Solicitar API KEY
+    API_KEY = document.getElementById('input').value;
+    const dataValidation = await createValidation();
+    console.log('***', dataValidation);
+    if(dataValidation.validation_status !== "pending") {
+        alert('API-Key inválida');
+    } else {
+        //Activamos el boton de validar documento para respetar el flujo de nuestro programa 
+        const button = document.getElementById("saveImages");
+        button.disabled = false;
+        alert('API-Key válida')
+    }
+}
 
+async function main() {
     // Obtener elementos de entrada de archivo
     const frontImageInput = document.getElementById('frontImage');
     const backImageInput = document.getElementById('reverseImage');
@@ -64,7 +77,7 @@ async function createValidation() {
         });
 
         const data = await res.json(); //Permite convertir la respuesta en un objeto JavaScript
-        console.log(res);
+        //console.log(res);
         return data;
 }
     catch (error) {
@@ -132,7 +145,8 @@ async function validateDocument() {
         }
 
         const data = await response.json();
-        console.log('Validación exitosa:', response);
+        document.getElementById('resultado').value = JSON.stringify(data, null, 2);
+        //alert('Validación exitosa:', response);
         console.log('*****', data);
     } catch (error) {
         console.error('Error durante la validación:', error);
