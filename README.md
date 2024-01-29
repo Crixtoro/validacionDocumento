@@ -17,8 +17,9 @@ El programa crea una página web sencilla que funciona de la siguiente manera:
 ### Observación: 
 Si el resultado de la validación arroja el estado "validation_status": "pending", se puede deber a dos factores:
 1.  has been blocked by CORS policy: El CORS ha bloqueado nuestra solicitud a la API, esto se soluciona entrando al DevTools de nuestro navegador, seleccionamos la pestaña Network, damos doble click en la petición que presenta el 'status code: 503', y habilitamos la opción "Request temporary access to the demo server"
+  - Realizado este procedimiento se debe refrescar la pagina para iniciar de nuevo el proceso de validación. 
   
   ![image](https://github.com/Crixtoro/validacionDocumento/assets/111707866/ad6db7eb-bd0c-4c91-92f8-1dc25425edf2)
   
-2. Si no encontramos ningún error, debemos dar clic de nuevo sobre el boton "Validar documento". 
+2. Si no encontramos ningún error, debemos dar clic de nuevo sobre el boton "Validar documento" (mientras se procesan las imagenes suministradas). 
 
